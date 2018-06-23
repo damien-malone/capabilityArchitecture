@@ -1,4 +1,4 @@
-package ui.common;
+package ui.common.helper;
 
 import javafx.scene.image.Image;
 import javafx.stage.Stage;

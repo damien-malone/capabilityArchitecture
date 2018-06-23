@@ -13,6 +13,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import ui.common.helper.StageHelper;
 
 public class StartScreen {
 	
