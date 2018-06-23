@@ -1,15 +1,9 @@
 package javafxDemo;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
-import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -30,7 +24,14 @@ public class JavaDemo extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Popup Example");  
+        
+    	showPopup(primaryStage);
+    	
+    }
+    
+    public void showPopup(Stage primaryStage)
+    {
+    	primaryStage.setTitle("Popup Example");  
         primaryStage.initStyle(StageStyle.UNDECORATED);
         
         String imgPath = "/ui/common/images/caparch.png"; 
@@ -71,11 +72,8 @@ public class JavaDemo extends Application {
 
         primaryStage.setScene(new Scene(layout));
         primaryStage.getIcons().add(image);
-        primaryStage.show();
-        
         primaryStage.centerOnScreen();
-        
-        primaryStage.getOnShown();
+        primaryStage.show();
         
         
      
