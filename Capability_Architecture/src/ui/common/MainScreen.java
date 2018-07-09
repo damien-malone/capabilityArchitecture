@@ -6,7 +6,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import ribbonbardemo.Driver;
 import ui.common.helper.StageHelper;
+import ui.layouts.mainPane.MainPane;
 import ui.layouts.ribbonBar.RibbonBar;
 
 public class MainScreen {
@@ -32,12 +34,19 @@ public class MainScreen {
         RibbonBar r = new RibbonBar(); 
         layout.setTop(r.get()); 
          
+        
+        MainPane mainPane = new MainPane();
+        layout.setCenter(mainPane.get());
+        
         //Set Scene properties. 
         setSceneProperties(); 
          
         //Set a few properties of our Application Window 
         stage.setScene(scene); 
         stage.setTitle("Ribbon Menu Demo"); 
+        stage.setX(Driver.getNextXAxis());
+        stage.setX(Driver.getNextYAxis());
+       
         stage.show(); 
     } 
 	
@@ -59,7 +68,7 @@ public class MainScreen {
         //Create a scene object. Pass in the layout and set 
         //the dimensions to 98% of screen width & 90% screen height. 
         this.scene = new Scene(layout, percentageWidth, percentageHeight); 
-         
+        
         //Add CSS Style Sheet (located in same package as this class). 
         //String css = this.getClass().getResource("App.css").toExternalForm(); 
          

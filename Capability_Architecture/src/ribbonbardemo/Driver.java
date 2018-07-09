@@ -1,5 +1,7 @@
 package ribbonbardemo;
  
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -14,6 +16,9 @@ import ui.common.StartScreen;
  */ 
 public class Driver extends Application { 
     
+	static int xAxis = -30;
+	static int yAxis = -30;
+	
     /**
      * Application Entry Point. Program starts here. 
      * @param args  
@@ -37,7 +42,8 @@ public class Driver extends Application {
             @Override
             protected Void call() throws Exception {
                 try {
-                    Thread.sleep(5000);
+                	//TODO change time
+                    Thread.sleep(000);//should be 5000
                 } catch (InterruptedException e) {
                 }
                 return null;
@@ -52,6 +58,15 @@ public class Driver extends Application {
         });
         new Thread(sleeper).start();
     	
+    }
+    
+    
+    public static int getNextXAxis() {
+    	return xAxis+=30;
+    }
+    
+    public static int getNextYAxis() {
+    	return yAxis+=30;
     }
             
 }
