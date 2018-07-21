@@ -61,7 +61,7 @@ public class Driver extends Application {
     }
     
     
-    public static int getNextXAxis() {
+    public static int getNextXAxis() {  
     	return xAxis+=30;
     }
     
