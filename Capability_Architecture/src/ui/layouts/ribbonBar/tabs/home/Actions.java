@@ -5,12 +5,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos; 
 import javafx.scene.control.Button; 
-import javafx.scene.control.ContentDisplay; 
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip; 
 import javafx.scene.image.Image; 
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -141,7 +144,37 @@ public class Actions {
     	MainPane.basePane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     	
     	HBox canvas = new HBox();
-    	canvas.getChildren().add(new Label("Test"));
+    	canvas.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+    	canvas.setMinSize(100, 100);
+    	canvas.getChildren().add(new Label("Untitled Organisation"));
+    	
+    	canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+    		  public void handle(MouseEvent mouseEvent) {
+    			  if (mouseEvent.isSecondaryButtonDown()) {
+    				  System.out.println("right mouse click detected! " + mouseEvent.getSource());
+    				  
+    				  final ContextMenu contextMenu = new ContextMenu();
+    				  MenuItem newCapability = new MenuItem("New Capability");
+    				  MenuItem changeName = new MenuItem("Change Name");
+
+    				  contextMenu.getItems().addAll(newCapability, changeName);
+    				  
+    				  newCapability.setOnAction(new EventHandler<ActionEvent>() {
+    				      @Override
+    				      public void handle(ActionEvent event) {
+    				          System.out.println("adding new level 1");
+    				      }
+    				  });
+    				  
+    				  contextMenu.setAutoHide(true);
+    			
+    				  
+    				  contextMenu.show(canvas, mouseEvent.getScreenX(), mouseEvent.getScreenY());
+
+    			  }  
+    			  
+    		  }
+    		});
     
     	MainPane.basePane.setContent(canvas);
     }
@@ -335,5 +368,11 @@ public class Actions {
  
   }); 
  } 
+ 
+ public void addLevel1()
+ {
+	 
+ }
+  
  
 }

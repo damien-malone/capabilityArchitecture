@@ -4,7 +4,9 @@ import javafx.scene.control.ScrollPane;
 
 public class MainPane {
 	
+	//todo change these from static to one per stage
 	public static ScrollPane basePane;
+	public static boolean hasContent = false;
 	
 	public MainPane() {
 		basePane =  new ScrollPane();
@@ -18,11 +20,15 @@ public class MainPane {
 	
 	static public boolean hasContent()
 	{
-		if(basePane.getChildrenUnmodifiable().size()>0)
+		if(hasContent == false)
 		{
-			return true;
+			hasContent = true;
+			return false;
 		}
-		return false;
+		else
+			return true;
 		
 	}
+
+
 }
