@@ -162,7 +162,7 @@ public class Actions {
     				  newCapability.setOnAction(new EventHandler<ActionEvent>() {
     				      @Override
     				      public void handle(ActionEvent event) {
-    				          System.out.println("adding new level 1");
+    				    	  addLevel1();
     				      }
     				  });
     				  
@@ -371,7 +371,7 @@ public class Actions {
  
  public void addLevel1()
  {
-	 
+	 System.out.println("Adding new level 1 capability");
  }
   
  
