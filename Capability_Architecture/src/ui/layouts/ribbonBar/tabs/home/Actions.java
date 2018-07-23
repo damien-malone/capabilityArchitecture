@@ -16,7 +16,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -143,7 +148,7 @@ public class Actions {
     {
     	MainPane.basePane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     	
-    	HBox canvas = new HBox();
+    	HBox canvas = new HBox(10);
     	canvas.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     	canvas.setMinSize(100, 100);
     	canvas.getChildren().add(new Label("Untitled Organisation"));
@@ -162,7 +167,7 @@ public class Actions {
     				  newCapability.setOnAction(new EventHandler<ActionEvent>() {
     				      @Override
     				      public void handle(ActionEvent event) {
-    				    	  addLevel1();
+    				    	  addLevel1((HBox)mouseEvent.getSource());
     				      }
     				  });
     				  
@@ -369,10 +374,54 @@ public class Actions {
   }); 
  } 
  
- public void addLevel1()
+ public void addLevel1(HBox hbox)
  {
 	 System.out.println("Adding new level 1 capability");
+	 hbox.getChildren().add(buildLevel1Pane());
  }
   
+ public Pane buildLevel1Pane()
+ {
+	 FlowPane pane = new FlowPane(10, 10);
+	 pane.setBorder(new Border(new BorderStroke(Color.BLACK, 
+	             BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
+	 
+	 pane.setPadding(new Insets(15,15,15,15));
+	 
+	 pane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+	 pane.getChildren().add(new Label("Untitled Capability"));
+ 	
+ 	 pane.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+ 		  public void handle(MouseEvent mouseEvent) {
+ 			  if (mouseEvent.isSecondaryButtonDown()) {
+ 				  System.out.println("right mouse click detected! " + mouseEvent.getSource());
+ 				  
+ 				  final ContextMenu contextMenu = new ContextMenu();
+ 				  MenuItem newCapability = new MenuItem("New Level 2");
+ 				  MenuItem changeName = new MenuItem("Change Name");
+
+ 				  contextMenu.getItems().addAll(newCapability, changeName);
+ 				  
+ 				  newCapability.setOnAction(new EventHandler<ActionEvent>() {
+ 				      @Override
+ 				      public void handle(ActionEvent event) {
+ 				    	  //TODO
+ 				    	  System.out.println("TO DO, create new level 2 architecture item");
+ 				      }
+ 				  });
+ 				  
+ 				  contextMenu.setAutoHide(true);
+ 			
+ 				  
+ 				  contextMenu.show(pane, mouseEvent.getScreenX(), mouseEvent.getScreenY());
+
+ 			  }  
+ 			  
+ 		  }
+ 		});
+ 	
+ 	return pane;
+ 
+ }
  
 }
