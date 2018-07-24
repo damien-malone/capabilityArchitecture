@@ -30,7 +30,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ui.common.MainScreen;
-import ui.layouts.mainPane.MainPane; 
+import ui.layouts.mainPane.MainPane;
+import ui.layouts.panes.PaneCreator; 
  
 /**
  * Tables. This class represents the Actions Ribbon Bar Component. 
@@ -39,6 +40,7 @@ public class Actions {
  
  private Button btnNew, btnOpen, btnEmail, btnPrint, btnPDF, btnDelete; 
  private VBox root; 
+ PaneCreator paneCreator = new PaneCreator();
  
  /**
   * Default Constructor. 
@@ -147,11 +149,20 @@ public class Actions {
     else
     {
     	MainPane.basePane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+    	VBox vbox = new VBox(15);
+    	
+    	MainScreen.layout.setRight(paneCreator.buildPropertiesEditor());
+    	
+    	vbox.setBorder(new Border(new BorderStroke(Color.BLACK, 
+   			 BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
+    	vbox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     	
     	HBox canvas = new HBox(10);
     	canvas.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     	canvas.setMinSize(100, 100);
-    	canvas.getChildren().add(new Label("Untitled Organisation"));
+    	vbox.getChildren().add(new Label("Untitled Organisation"));
+    	
+    	vbox.getChildren().add(canvas);
     	
     	canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
     		  public void handle(MouseEvent mouseEvent) {
@@ -181,7 +192,7 @@ public class Actions {
     		  }
     		});
     
-    	MainPane.basePane.setContent(canvas);
+    	MainPane.basePane.setContent(vbox);
     }
  
    } 
@@ -377,51 +388,9 @@ public class Actions {
  public void addLevel1(HBox hbox)
  {
 	 System.out.println("Adding new level 1 capability");
-	 hbox.getChildren().add(buildLevel1Pane());
- }
-  
- public Pane buildLevel1Pane()
- {
-	 FlowPane pane = new FlowPane(10, 10);
-	 pane.setBorder(new Border(new BorderStroke(Color.BLACK, 
-	             BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
-	 
-	 pane.setPadding(new Insets(15,15,15,15));
-	 
-	 pane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-	 pane.getChildren().add(new Label("Untitled Capability"));
- 	
- 	 pane.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
- 		  public void handle(MouseEvent mouseEvent) {
- 			  if (mouseEvent.isSecondaryButtonDown()) {
- 				  System.out.println("right mouse click detected! " + mouseEvent.getSource());
- 				  
- 				  final ContextMenu contextMenu = new ContextMenu();
- 				  MenuItem newCapability = new MenuItem("New Level 2");
- 				  MenuItem changeName = new MenuItem("Change Name");
-
- 				  contextMenu.getItems().addAll(newCapability, changeName);
- 				  
- 				  newCapability.setOnAction(new EventHandler<ActionEvent>() {
- 				      @Override
- 				      public void handle(ActionEvent event) {
- 				    	  //TODO
- 				    	  System.out.println("TO DO, create new level 2 architecture item");
- 				      }
- 				  });
- 				  
- 				  contextMenu.setAutoHide(true);
- 			
- 				  
- 				  contextMenu.show(pane, mouseEvent.getScreenX(), mouseEvent.getScreenY());
-
- 			  }  
- 			  
- 		  }
- 		});
- 	
- 	return pane;
- 
+	 hbox.getChildren().add(paneCreator.buildLevel1Pane());
  }
  
+
+
 }

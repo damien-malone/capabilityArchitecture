@@ -13,7 +13,7 @@ import ui.layouts.ribbonBar.RibbonBar;
 
 public class MainScreen {
     private Scene scene; 
-    private BorderPane layout; 
+    public static BorderPane layout; 
     Stage stage;
     
     public MainScreen(Stage stage)
@@ -38,6 +38,7 @@ public class MainScreen {
         MainPane mainPane = new MainPane();
         layout.setCenter(mainPane.get());
         
+        
         //Set Scene properties. 
         setSceneProperties(); 
          
@@ -45,7 +46,7 @@ public class MainScreen {
         stage.setScene(scene); 
         stage.setTitle("Ribbon Menu Demo"); 
         stage.setX(Driver.getNextXAxis());
-        stage.setX(Driver.getNextYAxis());
+        stage.setY(Driver.getNextYAxis());
        
         stage.show(); 
     } 
