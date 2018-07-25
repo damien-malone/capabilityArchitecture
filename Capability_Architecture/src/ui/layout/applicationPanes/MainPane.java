@@ -1,4 +1,4 @@
-package ui.layouts.mainPane;
+package ui.layout.applicationPanes;
 
 import javafx.scene.control.ScrollPane;
 

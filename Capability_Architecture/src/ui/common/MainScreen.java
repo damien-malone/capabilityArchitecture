@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ribbonbardemo.Driver;
 import ui.common.helper.StageHelper;
-import ui.layouts.mainPane.MainPane;
+import ui.layout.applicationPanes.MainPane;
 import ui.layouts.ribbonBar.RibbonBar;
 
 public class MainScreen {
@@ -33,7 +33,8 @@ public class MainScreen {
         //Set BorderPane Regions 
         RibbonBar r = new RibbonBar(); 
         layout.setTop(r.get()); 
-         
+        layout.setStyle("-fx-border-style: dotted; -fx-border-width: 0 0 1 0;"
+                + "-fx-border-color: gray; -fx-font-weight: bold"); 
         
         MainPane mainPane = new MainPane();
         layout.setCenter(mainPane.get());

@@ -30,7 +30,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ui.common.MainScreen;
-import ui.layouts.mainPane.MainPane;
+import ui.layout.applicationPanes.MainPane;
+import ui.layout.applicationPanes.PropertyPane;
+import ui.layouts.panes.Level1BusinessCapability;
+import ui.layouts.panes.Organisation;
 import ui.layouts.panes.PaneCreator; 
  
 /**
@@ -148,51 +151,10 @@ public class Actions {
     }
     else
     {
-    	MainPane.basePane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	VBox vbox = new VBox(15);
+    	Organisation org = new Organisation();
     	
-    	MainScreen.layout.setRight(paneCreator.buildPropertiesEditor());
-    	
-    	vbox.setBorder(new Border(new BorderStroke(Color.BLACK, 
-   			 BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
-    	vbox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	
-    	HBox canvas = new HBox(10);
-    	canvas.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	canvas.setMinSize(100, 100);
-    	vbox.getChildren().add(new Label("Untitled Organisation"));
-    	
-    	vbox.getChildren().add(canvas);
-    	
-    	canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-    		  public void handle(MouseEvent mouseEvent) {
-    			  if (mouseEvent.isSecondaryButtonDown()) {
-    				  System.out.println("right mouse click detected! " + mouseEvent.getSource());
-    				  
-    				  final ContextMenu contextMenu = new ContextMenu();
-    				  MenuItem newCapability = new MenuItem("New Capability");
-    				  MenuItem changeName = new MenuItem("Change Name");
-
-    				  contextMenu.getItems().addAll(newCapability, changeName);
-    				  
-    				  newCapability.setOnAction(new EventHandler<ActionEvent>() {
-    				      @Override
-    				      public void handle(ActionEvent event) {
-    				    	  addLevel1((HBox)mouseEvent.getSource());
-    				      }
-    				  });
-    				  
-    				  contextMenu.setAutoHide(true);
-    			
-    				  
-    				  contextMenu.show(canvas, mouseEvent.getScreenX(), mouseEvent.getScreenY());
-
-    			  }  
-    			  
-    		  }
-    		});
-    
-    	MainPane.basePane.setContent(vbox);
+    	MainScreen.layout.setRight(new PropertyPane(org));
+    	MainPane.basePane.setContent(org);
     }
  
    } 
@@ -385,11 +347,7 @@ public class Actions {
   }); 
  } 
  
- public void addLevel1(HBox hbox)
- {
-	 System.out.println("Adding new level 1 capability");
-	 hbox.getChildren().add(paneCreator.buildLevel1Pane());
- }
+
  
 
 
