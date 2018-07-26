@@ -9,42 +9,37 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import logic.capability.BusinessCapability;
 import ui.layouts.panes.Level1BusinessCapability;
 import ui.layouts.panes.Organisation;
 
 public class PropertyPane extends FlowPane {
 
-	Level1BusinessCapability capability;
-	Organisation org;
+	BusinessCapability capability;
 	
 	TextField name;
 	
 	public PropertyPane() {
 		super();
 
-		setMaxWidth(150);
+		setMaxWidth(200);
 		
 	}
 	
-	public PropertyPane(Level1BusinessCapability capability) {
+	public PropertyPane(BusinessCapability capability) {
 		super();
-
-		setMaxWidth(150);
-		
-	}
-	
-	public PropertyPane(Organisation org) {
-		super();
-		this.org = org;
-		setMaxWidth(150);
+		this.capability = capability;
+		setMaxWidth(200);
 		buildScreen();
+		setActivePanel(capability);
 		
 	}
 	
 	
-	public void setActivePanel(Level1BusinessCapability capability)
+	public void setActivePanel(BusinessCapability capability)
 	{
 		this.capability = capability;
+		name.setText(capability.getCapabilityName());
 	}
 	
 	
@@ -61,8 +56,7 @@ public class PropertyPane extends FlowPane {
 			   @Override 
 			   public void handle(KeyEvent event) { 
 			 
-			    System.out.println("text changed"); 
-			    org.name.setText(name.getText());
+			    capability.capabilityName.setText(name.getText());
 			 
 			   } 
 			 

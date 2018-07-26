@@ -15,17 +15,19 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import logic.capability.BusinessCapability;
 import ui.common.MainScreen;
+import ui.layout.applicationPanes.PropertyPane;
 
-public class Organisation extends VBox{
+public class Organisation extends BusinessCapability{
 
-	public Label name = new Label("Untitled Organisation");
+	
 	
 	public Organisation() {
-		super(15);
-    	
+		//super(15);
+		capabilityName = new Label("Untitled Organisation");
+		
     	setBorder(new Border(new BorderStroke(Color.BLACK, 
    			 BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
     	setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -33,7 +35,7 @@ public class Organisation extends VBox{
     	HBox canvas = new HBox(10);
     	canvas.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     	canvas.setMinSize(100, 100);
-    	getChildren().add(name);
+    	getChildren().add(capabilityName);
     	
     	getChildren().add(canvas);
     	
@@ -55,9 +57,7 @@ public class Organisation extends VBox{
     				      }
     				  });
     				  
-    				  contextMenu.setAutoHide(true);
-    			
-    				  
+    				  contextMenu.setAutoHide(true);			
     				  contextMenu.show(canvas, mouseEvent.getScreenX(), mouseEvent.getScreenY());
 
     			  }  
@@ -68,8 +68,11 @@ public class Organisation extends VBox{
 	
 	 public void addLevel1(HBox hbox)
 	 {
-		 System.out.println("Adding new level 1 capability object");
-		 hbox.getChildren().add(new Level1BusinessCapability());
+		 Level1BusinessCapability capability = new Level1BusinessCapability();
+		 hbox.getChildren().add(capability);
+		 
+		 PropertyPane properties = (PropertyPane)MainScreen.layout.getRight();
+		 properties.setActivePanel(capability);
 	 }
 
 }

@@ -18,11 +18,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import logic.capability.BusinessCapability;
 
-public class Level1BusinessCapability extends BusinessCapability {
+public class Level2BusinessCapability extends BusinessCapability {
 
 	
 	
-	public Level1BusinessCapability() {
+	public Level2BusinessCapability() {
 		super();
 		capabilityName = new Label("Untitled Capability");
 		setBorder(new Border(new BorderStroke(Color.BLACK, 
