@@ -15,15 +15,20 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import logic.capability.BusinessCapability;
+import ui.common.MainScreen;
+import ui.layout.applicationPanes.PropertyPane;
 
 public class Level1BusinessCapability extends BusinessCapability {
 
 	
 	
 	public Level1BusinessCapability() {
-		super();
+	
+		super(4,10);
+		
 		capabilityName = new Label("Untitled Capability");
 		setBorder(new Border(new BorderStroke(Color.BLACK, 
 				 BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
@@ -47,6 +52,7 @@ public class Level1BusinessCapability extends BusinessCapability {
 						 public void handle(ActionEvent event) {
 							 //TODO
 							 System.out.println("TO DO, create new level 2 architecture item");
+							 addLevel2((FlowPane)mouseEvent.getSource());
 						 }
 					 });
 
@@ -56,6 +62,12 @@ public class Level1BusinessCapability extends BusinessCapability {
 					 contextMenu.show(getParent(), mouseEvent.getScreenX(), mouseEvent.getScreenY());
 
 				 }  
+				 else
+				 {
+					 PropertyPane properties = (PropertyPane)MainScreen.layout.getRight();
+					 properties.setActivePanel((BusinessCapability)mouseEvent.getSource());
+				 }
+					 
 
 			 }
 		 });
@@ -69,4 +81,13 @@ public class Level1BusinessCapability extends BusinessCapability {
 		return sb.toString();
 	}
 
+	
+	 public void addLevel2(FlowPane hbox)
+	 {
+		 Level2BusinessCapability capability = new Level2BusinessCapability();
+		 hbox.getChildren().add(capability);
+		 
+		 PropertyPane properties = (PropertyPane)MainScreen.layout.getRight();
+		 properties.setActivePanel(capability);
+	 }
 }

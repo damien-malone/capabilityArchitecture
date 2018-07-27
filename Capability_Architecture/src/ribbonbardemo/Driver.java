@@ -43,7 +43,7 @@ public class Driver extends Application {
             protected Void call() throws Exception {
                 try {
                 	//TODO change time
-                    Thread.sleep(000);//should be 5000
+                    Thread.sleep(1000);//should be 5000
                 } catch (InterruptedException e) {
                 }
                 return null;

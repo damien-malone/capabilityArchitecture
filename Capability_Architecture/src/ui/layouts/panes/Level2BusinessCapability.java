@@ -17,6 +17,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import logic.capability.BusinessCapability;
+import ui.common.MainScreen;
+import ui.layout.applicationPanes.PropertyPane;
 
 public class Level2BusinessCapability extends BusinessCapability {
 
@@ -24,6 +26,9 @@ public class Level2BusinessCapability extends BusinessCapability {
 	
 	public Level2BusinessCapability() {
 		super();
+		setVgap(5);
+		setHgap(5);
+		setWidth(50);
 		capabilityName = new Label("Untitled Capability");
 		setBorder(new Border(new BorderStroke(Color.BLACK, 
 				 BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
@@ -56,6 +61,11 @@ public class Level2BusinessCapability extends BusinessCapability {
 					 contextMenu.show(getParent(), mouseEvent.getScreenX(), mouseEvent.getScreenY());
 
 				 }  
+				 else
+				 {
+					 PropertyPane properties = (PropertyPane)MainScreen.layout.getRight();
+					 properties.setActivePanel((BusinessCapability)mouseEvent.getSource());
+				 }
 
 			 }
 		 });
@@ -64,7 +74,7 @@ public class Level2BusinessCapability extends BusinessCapability {
 	public String toXML()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("<Level1BusCap>").append(capabilityName.getText()).append("</Level1BusCap>");
+		sb.append("<Level2BusCap>").append(capabilityName.getText()).append("</Level2BusCap>");
 		
 		return sb.toString();
 	}

@@ -22,24 +22,23 @@ import ui.layout.applicationPanes.PropertyPane;
 
 public class Organisation extends BusinessCapability{
 
-	
+	HBox canvas = new HBox(10);
 	
 	public Organisation() {
-		//super(15);
+		super(4,15);
 		capabilityName = new Label("Untitled Organisation");
 		
     	setBorder(new Border(new BorderStroke(Color.BLACK, 
    			 BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
     	setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     	
-    	HBox canvas = new HBox(10);
     	canvas.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     	canvas.setMinSize(100, 100);
     	getChildren().add(capabilityName);
     	
     	getChildren().add(canvas);
     	
-    	canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+    	addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
     		  public void handle(MouseEvent mouseEvent) {
     			  if (mouseEvent.isSecondaryButtonDown()) {
     				  System.out.println("right mouse click detected! " + mouseEvent.getSource());
@@ -53,7 +52,7 @@ public class Organisation extends BusinessCapability{
     				  newCapability.setOnAction(new EventHandler<ActionEvent>() {
     				      @Override
     				      public void handle(ActionEvent event) {
-    				    	  addLevel1((HBox)mouseEvent.getSource());
+    				    	  addLevel1();
     				      }
     				  });
     				  
@@ -66,10 +65,10 @@ public class Organisation extends BusinessCapability{
     		});
 	}
 	
-	 public void addLevel1(HBox hbox)
+	 public void addLevel1()
 	 {
 		 Level1BusinessCapability capability = new Level1BusinessCapability();
-		 hbox.getChildren().add(capability);
+		 canvas.getChildren().add(capability);
 		 
 		 PropertyPane properties = (PropertyPane)MainScreen.layout.getRight();
 		 properties.setActivePanel(capability);

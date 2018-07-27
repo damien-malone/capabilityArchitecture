@@ -5,6 +5,11 @@ import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -70,6 +75,10 @@ public class StartScreen {
         
         layout.getChildren().addAll(imageView,verticalLayout);
 
+        layout.setBorder(new Border(new BorderStroke(Color.BLACK, 
+				 BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
+
+        
         stage.setScene(new Scene(layout));
         stage.getIcons().add(image);
         stage.centerOnScreen();
