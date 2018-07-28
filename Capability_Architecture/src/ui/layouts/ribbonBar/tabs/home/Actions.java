@@ -41,7 +41,7 @@ import ui.layouts.panes.PaneCreator;
  */ 
 public class Actions { 
  
- private Button btnNew, btnOpen, btnEmail, btnPrint, btnPDF, btnDelete; 
+ private Button btnNew, btnOpen, btnSaveAs, btnPrint, btnPDF, btnSave; 
  private VBox root; 
  PaneCreator paneCreator = new PaneCreator();
  
@@ -81,16 +81,16 @@ public class Actions {
   // Build UI Controls 
   this.buildNewButton(); 
   this.buildOpenButton(); 
-  this.buildEmailButton(); 
+  this.buildSaveAsButton(); 
   this.buildPDFButton(); 
   this.buildPrintButton(); 
-  this.buildDeleteButton(); 
+  this.buildSaveButton(); 
  
   // Add All Componets to the GridPane. 
   layout.add(this.btnNew, 0, 0); 
   layout.add(this.btnOpen, 1, 0); 
-  layout.add(this.btnDelete, 2, 0); 
-  layout.add(this.btnEmail, 3, 0); 
+  layout.add(this.btnSave, 2, 0); 
+  layout.add(this.btnSaveAs, 3, 0); 
   layout.add(this.btnPrint, 4, 0); 
   layout.add(this.btnPDF, 5, 0); 
  
@@ -200,31 +200,31 @@ public class Actions {
  } 
  
  /**
-  * buildEmailButton. Helper method to build a Button. 
+  * buildSaveAsButton. Helper method to build a Button. 
   */ 
- private void buildEmailButton() { 
+ private void buildSaveAsButton() { 
  
   // Create button with text. 
-  this.btnEmail = new Button("Email"); 
+  this.btnSaveAs = new Button("Save As"); 
  
   // Set the Image above the text. 
-  this.btnEmail.setContentDisplay(ContentDisplay.TOP); 
+  this.btnSaveAs.setContentDisplay(ContentDisplay.TOP); 
  
   // Add image. 
   String imgPath = "/ui/common/images/email.png"; 
   Image image = new Image(this.getClass().getResourceAsStream(imgPath), 
     24.0, 24.0, true, true); 
   ImageView imageView = new ImageView(image); 
-  this.btnEmail.setGraphic(imageView); 
+  this.btnSaveAs.setGraphic(imageView); 
  
   // Set CSS Styles. 
-  this.btnEmail.getStyleClass().add("ribbonToggleButton"); 
+  this.btnSaveAs.getStyleClass().add("ribbonToggleButton"); 
  
   // Set Tooltip 
-  this.btnEmail.setTooltip(new Tooltip("Email Order")); 
+  this.btnSaveAs.setTooltip(new Tooltip("Email Order")); 
  
   // Set simple Click Event Handler. 
-  this.btnEmail.setOnAction(new EventHandler<ActionEvent>() { 
+  this.btnSaveAs.setOnAction(new EventHandler<ActionEvent>() { 
  
    @Override 
    public void handle(ActionEvent event) { 
@@ -274,31 +274,31 @@ public class Actions {
  } 
  
  /**
-  * buildDeleteButton. Helper method to build a Button. 
+  * buildSaveButton. Helper method to build a Button. 
   */ 
- private void buildDeleteButton() { 
+ private void buildSaveButton() { 
  
   // Create button with text. 
-  this.btnDelete = new Button("Delete"); 
+  this.btnSave = new Button("Save"); 
  
   // Set the Image above the text. 
-  this.btnDelete.setContentDisplay(ContentDisplay.TOP); 
+  this.btnSave.setContentDisplay(ContentDisplay.TOP); 
  
   // Add image. 
   String imgPath = "/ui/common/images/delete.png"; 
   Image image = new Image(this.getClass().getResourceAsStream(imgPath), 
     24.0, 24.0, true, true); 
   ImageView imageView = new ImageView(image); 
-  this.btnDelete.setGraphic(imageView); 
+  this.btnSave.setGraphic(imageView); 
  
   // Set CSS Styles. 
-  this.btnDelete.getStyleClass().add("ribbonToggleButton"); 
+  this.btnSave.getStyleClass().add("ribbonToggleButton"); 
  
   // Set Tooltip 
-  this.btnDelete.setTooltip(new Tooltip("Delete Order")); 
+  this.btnSave.setTooltip(new Tooltip("Delete Order")); 
  
   // Set simple Click Event Handler. 
-  this.btnDelete.setOnAction(new EventHandler<ActionEvent>() { 
+  this.btnSave.setOnAction(new EventHandler<ActionEvent>() { 
  
    @Override 
    public void handle(ActionEvent event) { 

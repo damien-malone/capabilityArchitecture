@@ -25,12 +25,12 @@ public class Level2BusinessCapability extends BusinessCapability {
 	
 	
 	public Level2BusinessCapability() {
-		super();
+		//super(5,5);
 		setVgap(5);
 		setHgap(5);
 		setWidth(50);
 		capabilityName = new Label("Untitled Capability");
-		setBorder(new Border(new BorderStroke(Color.BLACK, 
+		setBorder(new Border(new BorderStroke(Color.DARKCYAN, 
 				 BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
 
 		setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));

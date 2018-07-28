@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import logic.capability.BusinessCapability;
@@ -22,18 +23,18 @@ import ui.layout.applicationPanes.PropertyPane;
 
 public class Organisation extends BusinessCapability{
 
-	HBox canvas = new HBox(10);
+	FlowPane canvas = new FlowPane(5,5);
 	
 	public Organisation() {
-		super(4,15);
+		canvas.setPrefWrapLength(1250);
 		capabilityName = new Label("Untitled Organisation");
 		
     	setBorder(new Border(new BorderStroke(Color.BLACK, 
-   			 BorderStrokeStyle.SOLID, new CornerRadii(5), BorderWidths.DEFAULT))); 
-    	setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+   			 BorderStrokeStyle.SOLID, new CornerRadii(0), BorderWidths.DEFAULT))); 
+    	setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(4))));
     	
-    	canvas.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	canvas.setMinSize(100, 100);
+    	canvas.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(4))));
+    	canvas.setMinSize(1000, 1000);
     	getChildren().add(capabilityName);
     	
     	getChildren().add(canvas);
@@ -45,9 +46,8 @@ public class Organisation extends BusinessCapability{
     				  
     				  final ContextMenu contextMenu = new ContextMenu();
     				  MenuItem newCapability = new MenuItem("New Capability");
-    				  MenuItem changeName = new MenuItem("Change Name");
-
-    				  contextMenu.getItems().addAll(newCapability, changeName);
+    				 
+    				  contextMenu.getItems().addAll(newCapability);
     				  
     				  newCapability.setOnAction(new EventHandler<ActionEvent>() {
     				      @Override

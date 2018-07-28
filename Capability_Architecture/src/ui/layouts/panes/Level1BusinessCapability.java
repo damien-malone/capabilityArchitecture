@@ -43,16 +43,14 @@ public class Level1BusinessCapability extends BusinessCapability {
 
 					 final ContextMenu contextMenu = new ContextMenu();
 					 MenuItem newCapability = new MenuItem("New Level 2");
-					 MenuItem changeName = new MenuItem("Change Name");
+					 MenuItem changeName = new MenuItem("Delete");
 
 					 contextMenu.getItems().addAll(newCapability, changeName);
 
 					 newCapability.setOnAction(new EventHandler<ActionEvent>() {
 						 @Override
 						 public void handle(ActionEvent event) {
-							 //TODO
-							 System.out.println("TO DO, create new level 2 architecture item");
-							 addLevel2((FlowPane)mouseEvent.getSource());
+							addLevel2((FlowPane)mouseEvent.getSource());
 						 }
 					 });
 
