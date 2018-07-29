@@ -74,7 +74,11 @@ public class Level1BusinessCapability extends BusinessCapability {
 	public String toXML()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("<Level1BusCap>").append(capabilityName.getText()).append("</Level1BusCap>");
+		sb.append("<Level1BusCap name=/'").append(capabilityName.getText())
+			.append("'>")
+			.append("<owner>").append(getOwner()).append("</owner>")
+			.append("<description>").append(getOwner()).append("</description>")
+			.append("</Level1BusCap>");
 		
 		return sb.toString();
 	}

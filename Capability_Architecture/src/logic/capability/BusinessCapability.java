@@ -7,10 +7,42 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
 public class BusinessCapability extends FlowPane {
-	public Label capabilityName = new Label();
 	
 	public enum Catagorisation {HYGENE ,COMPETE, DIFFERENTIATOR};
 	
+	public Label capabilityName = new Label();
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getOwner() {
+		return owner;
+	}
+
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+
+	public Catagorisation getCatagory() {
+		return Catagory;
+	}
+
+
+	public void setCatagory(Catagorisation catagory) {
+		Catagory = catagory;
+	}
+
+
+	public String description = new String();
+	public String owner = new String();	
 	public Catagorisation Catagory = Catagorisation.HYGENE;
 	
 	public String getCapabilityName()

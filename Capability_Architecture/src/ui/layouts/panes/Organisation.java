@@ -35,6 +35,7 @@ public class Organisation extends BusinessCapability{
     	
     	canvas.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, new Insets(4))));
     	canvas.setMinSize(1000, 1000);
+    	canvas.setPadding(new Insets(10, 10, 10, 10));
     	getChildren().add(capabilityName);
     	
     	getChildren().add(canvas);

@@ -29,6 +29,7 @@ public class MainScreen {
         //Initalize layout 
         layout = new BorderPane(); 
         layout.setId("app"); 
+
          
         //Set BorderPane Regions 
         RibbonBar r = new RibbonBar(); 
