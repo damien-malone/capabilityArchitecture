@@ -1,8 +1,12 @@
 package ui.layouts.panes;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -24,7 +28,10 @@ import ui.layout.applicationPanes.PropertyPane;
 public class Organisation extends BusinessCapability{
 
 	FlowPane canvas = new FlowPane(5,5);
+	String filename;
 	
+
+
 	public Organisation() {
 		canvas.setPrefWrapLength(1250);
 		capabilityName = new Label("Untitled Organisation");
@@ -74,5 +81,34 @@ public class Organisation extends BusinessCapability{
 		 PropertyPane properties = (PropertyPane)MainScreen.layout.getRight();
 		 properties.setActivePanel(capability);
 	 }
+	 
+		public String toXML()
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("<Organisation name='").append(capabilityName.getText())
+				.append("'>")
+				.append("\n<owner>").append(getOwner()).append("</owner>")
+				.append("\n<description>").append(getOwner()).append("</description>");
+				
+				List<Node> l = canvas.getChildren();
+				for (Iterator<Node> iterator = l.iterator(); iterator.hasNext();) {
+					Level1BusinessCapability node = (Level1BusinessCapability) iterator.next();
+					
+					sb.append("\n").append(((Level1BusinessCapability)node).toXML());
+				}
+				
+				
+				sb.append("\n</Organisation>");
+			
+			return sb.toString();
+		}
+		
+		public String getFilename() {
+			return filename;
+		}
+
+		public void setFilename(String filename) {
+			this.filename = filename;
+		}
 
 }

@@ -1,5 +1,10 @@
 package ui.layouts.ribbonBar.tabs.home;
  
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javafx.event.ActionEvent; 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -28,6 +33,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority; 
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ui.common.MainScreen;
 import ui.layout.applicationPanes.MainPane;
@@ -295,7 +301,7 @@ public class Actions {
   this.btnSave.getStyleClass().add("ribbonToggleButton"); 
  
   // Set Tooltip 
-  this.btnSave.setTooltip(new Tooltip("Delete Order")); 
+  this.btnSave.setTooltip(new Tooltip("Save file")); 
  
   // Set simple Click Event Handler. 
   this.btnSave.setOnAction(new EventHandler<ActionEvent>() { 
@@ -303,7 +309,21 @@ public class Actions {
    @Override 
    public void handle(ActionEvent event) { 
  
-    System.out.println("Delete Order Button clicked."); 
+    System.out.println("Save Button clicked."); 
+    Object node = MainPane.basePane.getContent(); 
+    
+    if(node!=null)
+    {
+    	Organisation org = (Organisation)node;
+    	
+    	System.out.println(org.toXML());
+    	if(org.getFilename()==null)
+    		saveAs(org);
+    	else
+    		save(org);
+    	
+    	
+    }
  
    } 
  
@@ -348,7 +368,51 @@ public class Actions {
  } 
  
 
- 
+ public void save(Organisation org)
+ {
+	 
+ }
 
+ public void saveAs(Organisation org)
+ {
+	 FileChooser fileChooser = new FileChooser();
 
+	//Extention filter
+	FileChooser.ExtensionFilter extentionFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
+	fileChooser.getExtensionFilters().add(extentionFilter);
+
+	//Set to user directory or go to default if cannot access
+	String userDirectoryString = System.getProperty("user.home");
+	File userDirectory = new File(userDirectoryString);
+	if(!userDirectory.canRead()) {
+	    userDirectory = new File("c:/");
+	}
+	fileChooser.setInitialDirectory(userDirectory);
+
+	//Choose the file
+	File chosenFile = fileChooser.showSaveDialog(null);
+	//Make sure a file was selected, if not return default
+	String path;
+	if(chosenFile != null) {
+	    path = chosenFile.getPath();
+	    
+	    PrintWriter fw = null;
+
+        try {
+            fw = new PrintWriter(chosenFile);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(org.toXML());
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+	    
+	} else {
+	    //default return value
+	    path = null;
+	}
+ }
 }
