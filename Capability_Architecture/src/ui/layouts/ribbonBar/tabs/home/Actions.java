@@ -5,40 +5,23 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javafx.event.ActionEvent; 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos; 
-import javafx.scene.control.Button; 
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tooltip; 
-import javafx.scene.image.Image; 
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority; 
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ui.common.MainScreen;
 import ui.layout.applicationPanes.MainPane;
 import ui.layout.applicationPanes.PropertyPane;
-import ui.layouts.panes.Level1BusinessCapability;
 import ui.layouts.panes.Organisation;
 import ui.layouts.panes.PaneCreator; 
  
@@ -230,16 +213,22 @@ public class Actions {
   this.btnSaveAs.setTooltip(new Tooltip("Email Order")); 
  
   // Set simple Click Event Handler. 
+  // Set simple Click Event Handler. 
   this.btnSaveAs.setOnAction(new EventHandler<ActionEvent>() { 
  
    @Override 
    public void handle(ActionEvent event) { 
  
-    System.out.println("Email Order Button clicked."); 
- 
-   } 
- 
-  }); 
+    System.out.println("Save Button clicked."); 
+    Object node = MainPane.basePane.getContent(); 
+    
+    if(node!=null)
+    {
+    	Organisation org = (Organisation)node;
+    	saveAs(org);
+    } 
+   }
+  });
  } 
  
  /**
@@ -315,18 +304,9 @@ public class Actions {
     if(node!=null)
     {
     	Organisation org = (Organisation)node;
-    	
-    	System.out.println(org.toXML());
-    	if(org.getFilename()==null)
-    		saveAs(org);
-    	else
-    		save(org);
-    	
-    	
-    }
- 
-   } 
- 
+    	save(org);
+    } 
+   }
   }); 
  } 
  
@@ -370,7 +350,11 @@ public class Actions {
 
  public void save(Organisation org)
  {
-	 
+	 if(org.getFile()!=null)
+		 saveContents(org, org.getFile());
+	 else
+		 saveAs(org);
+		 
  }
 
  public void saveAs(Organisation org)
@@ -387,32 +371,43 @@ public class Actions {
 	if(!userDirectory.canRead()) {
 	    userDirectory = new File("c:/");
 	}
+	
+	if(org.getFile()!=null)
+	{
+		userDirectory = org.getFile().getParentFile();
+	}
+	
 	fileChooser.setInitialDirectory(userDirectory);
 
 	//Choose the file
 	File chosenFile = fileChooser.showSaveDialog(null);
 	//Make sure a file was selected, if not return default
-	String path;
-	if(chosenFile != null) {
-	    path = chosenFile.getPath();
-	    
-	    PrintWriter fw = null;
+	
+	saveContents(org, chosenFile);
+ }
+ 
+ public void saveContents(Organisation org, File destination)
+ {
+		if(destination != null) {
+		    
+		    PrintWriter fw = null;
 
-        try {
-            fw = new PrintWriter(chosenFile);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(org.toXML());
-            bw.close();
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+	        try {
+	            fw = new PrintWriter(destination);
+	            BufferedWriter bw = new BufferedWriter(fw);
+	            bw.write(org.toXML());
+	            bw.close();
+	            fw.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
 
-        }
+	        }
 
-	    
-	} else {
-	    //default return value
-	    path = null;
-	}
+		    
+		} else {
+		    //default return value
+		    
+		}
+		org.setFile(destination);
  }
 }

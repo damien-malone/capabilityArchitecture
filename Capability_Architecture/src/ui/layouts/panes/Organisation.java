@@ -1,5 +1,6 @@
 package ui.layouts.panes;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,7 +29,7 @@ import ui.layout.applicationPanes.PropertyPane;
 public class Organisation extends BusinessCapability{
 
 	FlowPane canvas = new FlowPane(5,5);
-	String filename;
+	File file;
 	
 
 
@@ -103,12 +104,12 @@ public class Organisation extends BusinessCapability{
 			return sb.toString();
 		}
 		
-		public String getFilename() {
-			return filename;
+		public File getFile() {
+			return file;
 		}
 
-		public void setFilename(String filename) {
-			this.filename = filename;
+		public void setFile(File filename) {
+			this.file = filename;
 		}
 
 }
